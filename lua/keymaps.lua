@@ -16,6 +16,12 @@ map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", opts)
 map("n", "<leader>cd", vim.diagnostic.open_float, opts)
 map("n", "[d", vim.diagnostic.goto_prev, opts)
 map("n", "]d", vim.diagnostic.goto_next, opts)
+map("n", "<leader>dl", vim.diagnostic.setloclist, opts)
+map("n", "<leader>dq", vim.diagnostic.setqflist, opts)
+map("n", "<leader>dt", function()
+  local config = vim.diagnostic.config()
+  vim.diagnostic.config({ virtual_text = not config.virtual_text })
+end, opts)
 
 -- ToggleTerm: floating lazygit
 map("n", "<leader>lg", function()
