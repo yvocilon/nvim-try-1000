@@ -43,6 +43,24 @@ return {
 
 			-- Disable folding on alpha buffer
 			vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+
+			-- Show dashboard when opening a directory
+			vim.api.nvim_create_autocmd("BufEnter", {
+				group = vim.api.nvim_create_augroup("alpha_autostart", { clear = true }),
+				callback = function()
+					local buf = vim.api.nvim_get_current_buf()
+					local bufname = vim.api.nvim_buf_get_name(buf)
+					local buftype = vim.api.nvim_buf_get_option(buf, "buftype")
+					
+					-- Check if we're in a directory
+					if buftype == "" and vim.fn.isdirectory(bufname) == 1 then
+						-- Close the directory buffer
+						vim.cmd("bd")
+						-- Open alpha
+						require("alpha").start()
+					end
+				end,
+			})
 		end,
 	},
 
