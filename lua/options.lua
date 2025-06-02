@@ -12,6 +12,10 @@ o.termguicolors = true
 o.signcolumn = "yes"
 o.clipboard = "unnamedplus"
 
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Diagnostic configuration
 vim.diagnostic.config({
   virtual_text = {
