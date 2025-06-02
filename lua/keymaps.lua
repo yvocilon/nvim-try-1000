@@ -22,6 +22,13 @@ map("n", "<leader>dt", function()
   local config = vim.diagnostic.config()
   vim.diagnostic.config({ virtual_text = not config.virtual_text })
 end, opts)
+map("n", "<leader>dc", function()
+  local diagnostic = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })[1]
+  if diagnostic then
+    vim.fn.setreg("+", diagnostic.message)
+    vim.notify("Copied diagnostic message to clipboard", vim.log.levels.INFO)
+  end
+end, opts)
 
 -- ToggleTerm: floating lazygit
 map("n", "<leader>lg", function()

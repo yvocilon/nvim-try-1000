@@ -14,7 +14,11 @@ o.clipboard = "unnamedplus"
 
 -- Diagnostic configuration
 vim.diagnostic.config({
-  virtual_text = true, -- Show inline diagnostics
+  virtual_text = {
+    format = function(diagnostic)
+      return string.format("%s", diagnostic.message)
+    end,
+  },
   signs = true, -- Show signs in the sign column
   underline = true, -- Underline the text with the diagnostic
   update_in_insert = false, -- Don't update diagnostics while in insert mode
